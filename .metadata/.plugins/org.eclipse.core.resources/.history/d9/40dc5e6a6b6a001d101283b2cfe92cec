@@ -1,0 +1,7 @@
+package job_portal_system;
+
+public class Application {
+   String companyName;
+   String ApplicatName;
+   
+}

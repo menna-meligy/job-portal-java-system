@@ -1,0 +1,15 @@
+package job_portal_system;
+
+public class Main {
+	public static void main(String[] args) {
+		
+		
+	@SuppressWarnings("unused")
+	FirstPage fp = new FirstPage();
+		
+		//Applicant app1 = new Applicant();
+		
+		//System.out.print(app1.getSkills());
+
+	}
+}

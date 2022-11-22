@@ -1,0 +1,126 @@
+package job_portal_system;
+
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+public class HomePage {
+	final int message_price = 5;
+	JFrame frame = new JFrame();
+	JLabel Message = new JLabel();
+	JLabel Message2 = new JLabel();
+	JTextField textfield = new JTextField();
+	JTextField textfield2 = new JTextField();
+	JButton changepass = new JButton("OK");
+	JButton changename = new JButton("OK");
+	JButton addmessage = new JButton("OK");
+	JButton addcredit = new JButton("OK");
+	JButton addtans = new JButton("OK");
+	JPasswordField passwordfield = new JPasswordField();
+	JMenuBar menuBar = new JMenuBar();
+	JMenu infomenu = new JMenu("Your info");
+	JMenu editmenu = new JMenu("Edit");
+	JMenu messagemenu = new JMenu("Message");
+	JMenu creditsmenu = new JMenu("Your Credits");
+	JMenu Exit = new JMenu("Sign out");
+	int Current_user;
+	ArrayList<Applicant> Users = new ArrayList<Applicant>();
+	
+	
+	JMenuItem i1 = new JMenuItem("View your info");
+	
+	JMenuItem e2 = new JMenuItem("Edit your password");
+	JMenuItem e3 = new JMenuItem("Edit your Name");
+	
+	JMenuItem m1 = new JMenuItem("New Message");
+	JMenuItem m2 = new JMenuItem("View sent Messages");
+	JMenuItem m3 = new JMenuItem("View received Messages");
+	
+	JMenuItem t1 = new JMenuItem("New Transaction");
+	JMenuItem t4 = new JMenuItem("Top up Credits");
+	
+	JMenuItem q1 = new JMenuItem("Sign out");
+	
+	Message me1 = new Message();
+	Message me2 = new Message();
+	
+	
+	HomePage(int i, ArrayList<User> OUsers){
+		
+		
+		Current_user= i;
+		Users = OUsers;
+		infomenu.add(i1);
+		infomenu.add(editmenu);
+		Messages = Serialize.Mload();
+		
+		passwordfield.setBounds(250, 105, 125, 25);
+		textfield.setBounds(250, 105, 125, 25);
+		textfield2.setBounds(250, 80, 125, 25);
+		
+		changepass.setBounds(20, 135, 100, 25);
+		changepass.setFocusable(false);
+		changepass.addActionListener(this);
+		
+		addcredit.setBounds(20, 135, 100, 25);
+		addcredit.setFocusable(false);
+		addcredit.addActionListener(this);
+		
+		changename.setBounds(20, 135, 100, 25);
+		changename.setFocusable(false);
+		changename.addActionListener(this);
+		
+		addmessage.setBounds(20, 135, 100, 25);
+		addmessage.setFocusable(false);
+		addmessage.addActionListener(this);
+		
+		addtans.setBounds(20, 135, 100, 25);
+		addtans.setFocusable(false);
+		addtans.addActionListener(this);
+		
+		editmenu.add(e2);
+		editmenu.add(e3);
+		
+		messagemenu.add(m1);
+		messagemenu.add(m2);
+		messagemenu.add(m3);
+		
+		creditsmenu.add(t1);
+		creditsmenu.add(t4);
+		
+		Exit.add(q1);
+		
+		menuBar.add(infomenu);
+		menuBar.add(messagemenu);
+		menuBar.add(creditsmenu);
+		menuBar.add(Exit);
+		
+		e2.addActionListener(this);
+		e3.addActionListener(this);
+		i1.addActionListener(this);
+		m1.addActionListener(this);
+		m2.addActionListener(this);
+		m3.addActionListener(this);
+		t4.addActionListener(this);
+		q1.addActionListener(this);
+		t1.addActionListener(this);
+		
+		frame.setJMenuBar(menuBar);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(500,500);
+		frame.setLayout(null);
+		frame.setVisible(true);
+		Message.setText("Welcome " + Users.get(i).getName());
+		Message.setBounds(10, 10, 250, 20);
+		Message.setFont(new Font(null, Font.ITALIC, 16));
+		Message2.setBounds(10, 60, 250, 100);
+		Message2.setFont(new Font(null, Font.PLAIN, 16));
+		frame.add(Message);
+		frame.add(Message2);
+}
