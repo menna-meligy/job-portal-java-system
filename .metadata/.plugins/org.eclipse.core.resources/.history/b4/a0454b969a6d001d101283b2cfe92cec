@@ -1,0 +1,168 @@
+package job_portal_system;
+
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.Serializable;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+public class RegistrationPage2 implements ActionListener , Serializable {
+		// TODO Auto-generated constructor stub
+		
+		JLabel welcome = new JLabel("WELCOME TO OUR JOB PORTAL");
+		JFrame frame = new JFrame();
+		JButton registerButton = new JButton("Register");
+		//JButton cancelButton = new JButton("Cancel");
+		JButton resetButton = new JButton("Reset");
+		JTextField firstnameinput = new JTextField();
+		JPasswordField pass = new JPasswordField();
+		JTextField gmailinput = new JTextField();
+		JPasswordField confirmpasswordinput = new JPasswordField();
+		JTextField ProfileInplut = new JTextField();
+		JLabel Profile = new JLabel("Profile:");
+		//JLabel AvailablePosition = new JLabel("Required Position:");
+		JLabel Name = new JLabel("Name:");
+		JLabel UserPassword = new JLabel("Password:");
+		JLabel Gmail = new JLabel("Gmail:");
+		JLabel confirmpass = new JLabel("confirmPassword:");
+		JLabel Message = new JLabel();
+		//JLabel requirements = new JLabel("Requirements:");
+		JTextField requirementInput = new JTextField();
+
+		JLabel address = new JLabel("Address:");
+		JTextField addressInput = new JTextField();
+		ArrayList <Company>  companies = new ArrayList <Company>();
+		
+		RegistrationPage2(ArrayList<Company> OUsers){
+			
+			companies = OUsers;
+			Name.setBounds(50, 110, 125, 25);
+			UserPassword.setBounds(50, 190, 125, 25);
+			Gmail.setBounds(50, 140, 125, 25);
+			confirmpass.setBounds(50, 240, 125, 25);
+			Message.setBounds(120, 400, 300, 100);
+			Message.setFont(new Font(null, Font.BOLD, 10));
+			firstnameinput.setBounds(175, 110 , 200, 25);
+			welcome.setBounds(140 , 0 , 200 , 100);
+			gmailinput.setBounds(175, 140 , 200, 25);
+			confirmpasswordinput.setBounds(175, 240, 200, 25);
+			pass.setBounds(175, 190 , 200, 25);
+			//emailinput.setBounds(175, 200 , 200, 25);
+			ProfileInplut.setBounds(175, 290 , 200, 25);
+			Profile.setBounds(50, 290 , 290, 25);
+			//AvailablePosition.setBounds(50, 280 , 200, 25);
+			//requirements.setBounds(50,330 , 200 , 25);
+			//requirementInput.setBounds(175,330 , 200 , 25);
+			
+			address.setBounds(50 , 350 , 200 , 25);
+			addressInput.setBounds(175 , 350 , 200 , 25);
+			
+			registerButton.setBounds(125, 420, 100, 25);
+			registerButton.setFocusable(false);
+			registerButton.addActionListener(this);
+			//cancelButton.setBounds(325, 250, 100, 25);
+			//cancelButton.setFocusable(false);
+			//cancelButton.addActionListener(this);
+			resetButton.setBounds(225, 420, 100, 25);
+			resetButton.setFocusable(false);
+			resetButton.addActionListener(this);
+			
+			frame.add(registerButton);
+			frame.add(resetButton);
+			frame.add(Gmail);
+			frame.add(UserPassword);
+			frame.add(Name);
+			frame.add(Message);
+			frame.add(pass);
+			frame.add(gmailinput);
+			frame.add(confirmpasswordinput);
+			//frame.add(emailinput);
+			frame.add(firstnameinput);
+			frame.add(ProfileInplut);
+			frame.add(confirmpass);
+			frame.add(welcome);
+			frame.add(Profile);
+			//frame.add(AvailablePosition);
+			//frame.add(requirements);
+			//frame.add(requirementInput);
+			frame.add(address);
+			frame.add(addressInput);
+			
+			
+			//frame.add(cancelButton);
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frame.setSize(500,500);
+			frame.setLayout(null);
+			frame.setVisible(true);
+			
+			
+	}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			
+			if(e.getSource() == registerButton)
+			{ 
+				//checks if the username expists before
+				boolean unvalid = false;
+				Company company = new Company();
+				company.setName(firstnameinput.getText());
+				company.setPassword(String.valueOf(((JPasswordField) pass).getPassword()));
+				company.setEmail(gmailinput.getText());
+					if (company.Is_exists(companies)) {
+						unvalid = true;
+						Message.setText("Username Exists");
+					}
+				if(gmailinput.getText().isEmpty() || firstnameinput.getText().isEmpty() || String.valueOf(((JPasswordField) pass).getPassword()).isEmpty())
+				{
+					Message.setText("Invalid data , please fill in the empty fields");
+					unvalid = true;
+				}
+				company.setName(firstnameinput.getText());
+				company.setPassword(String.valueOf(pass.getPassword()));
+				company.setEmail(gmailinput.getText());
+				company.setProfile(ProfileInplut.getText());
+				//company.setRequirements(requirementInput.getText());
+				company.setAddress(addressInput.getText());
+				company.setconfirmPassword(String.valueOf(confirmpasswordinput.getPassword()));
+				if(unvalid == false) {
+					companies.add(company);
+					Serialize.Csave(companies);
+					JOptionPane pane = new JOptionPane();
+					pane.setMessage("Successfully Registered");
+					JDialog d = pane.createDialog((frame), "Message");
+					d.setLocation(200, 200);
+					d.setVisible(true);
+					frame.dispose();
+					LoginPage2 loginpage = new LoginPage2(companies);
+				}
+				//Message.setText(Users.get(6).getName());
+			}
+			/*if(e.getSource() == cancelButton)
+			{
+				frame.dispose();
+				LoginPage loginpage = new LoginPage(Users);
+			}*/
+			if(e.getSource() == resetButton) {
+				firstnameinput.setText("");
+				gmailinput.setText("");
+				pass.setText("");
+				confirmpasswordinput.setText("");
+				ProfileInplut.setText("");
+				
+			}
+			
+			
+		}
+
+	
+}

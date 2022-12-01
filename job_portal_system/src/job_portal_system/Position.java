@@ -70,6 +70,5 @@ public class Position implements Serializable{
 
 	public void setApplications(ArrayList <Application> applications) {
 		this.applications = applications;
-	}*/
-
+	}*/	
 }

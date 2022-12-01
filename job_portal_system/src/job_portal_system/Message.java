@@ -8,11 +8,13 @@ public class Message implements Serializable {
 	private String Receiver;
 	private String Content;
 	
-	Message()
+	Message(){}
+	
+	Message(String sender,String receiver ,String content)
 	{
-		this.Sender = "";
-		this.Receiver = "";
-		this.Content = "";
+		this.Sender = sender;
+		this.Receiver = receiver;
+		this.Content = content;
 	}
 	public String getSender() {
 		return Sender;

@@ -16,6 +16,7 @@ import java.awt.Font;
 public class RegistrationPage implements ActionListener , Serializable {
 	JLabel welcome = new JLabel("WELCOME TO OUR JOB PORTAL");
 	JFrame frame = new JFrame();
+	JButton backbutton = new JButton("Back");
 	JButton registerButton = new JButton("Register");
 	//JButton cancelButton = new JButton("Cancel");
 	JButton resetButton = new JButton("Reset");
@@ -35,6 +36,12 @@ public class RegistrationPage implements ActionListener , Serializable {
 	ArrayList <Applicant>  applicants = new ArrayList <Applicant>();
 	
 	RegistrationPage(ArrayList<Applicant> OUsers){
+		
+		 
+
+		backbutton.setBounds(325, 400, 100, 25);
+		backbutton.setFocusable(false);
+		backbutton.addActionListener(this); 
 		
 		applicants = OUsers;
 		Name.setBounds(50, 100, 125, 25);
@@ -62,7 +69,8 @@ public class RegistrationPage implements ActionListener , Serializable {
 		resetButton.setBounds(225, 400, 100, 25);
 		resetButton.setFocusable(false);
 		resetButton.addActionListener(this);
-		
+		frame.add(backbutton);
+		backbutton.setVisible(true);
 		frame.add(registerButton);
 		frame.add(resetButton);
 		frame.add(Gmail);
@@ -141,6 +149,11 @@ public class RegistrationPage implements ActionListener , Serializable {
 			skillsinput.setText("");
 			totalexperianceinput.setText("");
 			
+		}
+		
+		if(e.getSource() == backbutton) {
+			frame.dispose();
+			FirstPage fp = new FirstPage();
 		}
 	
 }

@@ -28,15 +28,15 @@ public class RegistrationPage2 implements ActionListener , Serializable {
 		JPasswordField confirmpasswordinput = new JPasswordField();
 		JTextField ProfileInplut = new JTextField();
 		JLabel Profile = new JLabel("Profile:");
-		JLabel AvailablePosition = new JLabel("Required Position:");
+		//JLabel AvailablePosition = new JLabel("Required Position:");
 		JLabel Name = new JLabel("Name:");
 		JLabel UserPassword = new JLabel("Password:");
 		JLabel Gmail = new JLabel("Gmail:");
 		JLabel confirmpass = new JLabel("confirmPassword:");
 		JLabel Message = new JLabel();
-		JLabel requirements = new JLabel("Requirements:");
+		//JLabel requirements = new JLabel("Requirements:");
 		JTextField requirementInput = new JTextField();
-
+		JButton backbutton = new JButton("Back");
 		JLabel address = new JLabel("Address:");
 		JTextField addressInput = new JTextField();
 		ArrayList <Company>  companies = new ArrayList <Company>();
@@ -44,37 +44,44 @@ public class RegistrationPage2 implements ActionListener , Serializable {
 		RegistrationPage2(ArrayList<Company> OUsers){
 			
 			companies = OUsers;
-			Name.setBounds(50, 30, 125, 25);
-			UserPassword.setBounds(50, 130, 125, 25);
-			Gmail.setBounds(50, 80, 125, 25);
-			confirmpass.setBounds(50, 180, 125, 25);
+			Name.setBounds(50, 110, 125, 25);
+			UserPassword.setBounds(50, 210, 125, 25);
+			Gmail.setBounds(50, 160, 125, 25);
+			confirmpass.setBounds(50, 250, 125, 25);
 			Message.setBounds(120, 400, 300, 100);
 			Message.setFont(new Font(null, Font.BOLD, 10));
-			firstnameinput.setBounds(175, 30 , 200, 25);
-			welcome.setBounds(140 , -40 , 200 , 100);
-			gmailinput.setBounds(175, 80 , 200, 25);
-			confirmpasswordinput.setBounds(175, 180, 200, 25);
-			pass.setBounds(175, 130 , 200, 25);
+			firstnameinput.setBounds(175, 110 , 200, 25);
+			welcome.setBounds(140 , 30 , 200 , 100);
+			gmailinput.setBounds(175, 160 , 200, 25);
+			confirmpasswordinput.setBounds(175, 250, 200, 25);
+			pass.setBounds(175, 210 , 200, 25);
 			//emailinput.setBounds(175, 200 , 200, 25);
-			ProfileInplut.setBounds(175, 230 , 200, 25);
-			Profile.setBounds(50, 230 , 200, 25);
-			AvailablePosition.setBounds(50, 280 , 200, 25);
-			requirements.setBounds(50,330 , 200 , 25);
-			requirementInput.setBounds(175,330 , 200 , 25);
+			ProfileInplut.setBounds(175, 300 , 200, 25);
+			Profile.setBounds(50, 300 , 290, 25);
+			//AvailablePosition.setBounds(50, 280 , 200, 25);
+			//requirements.setBounds(50,330 , 200 , 25);
+			//requirementInput.setBounds(175,330 , 200 , 25);
 			
-			address.setBounds(50 , 380 , 200 , 25);
-			addressInput.setBounds(175 , 380 , 200 , 25);
+			address.setBounds(50 , 350 , 200 , 25);
+			addressInput.setBounds(175 , 350 , 200 , 25);
 			
-			registerButton.setBounds(125, 420, 100, 25);
+
+			backbutton.setBounds(325, 390, 100, 25);
+			backbutton.setFocusable(false);
+			backbutton.addActionListener(this);
+			
+			registerButton.setBounds(125, 390, 100, 25);
 			registerButton.setFocusable(false);
 			registerButton.addActionListener(this);
 			//cancelButton.setBounds(325, 250, 100, 25);
 			//cancelButton.setFocusable(false);
 			//cancelButton.addActionListener(this);
-			resetButton.setBounds(225, 420, 100, 25);
+			resetButton.setBounds(225, 390, 100, 25);
 			resetButton.setFocusable(false);
 			resetButton.addActionListener(this);
 			
+			frame.add(backbutton);
+			backbutton.setVisible(true);
 			frame.add(registerButton);
 			frame.add(resetButton);
 			frame.add(Gmail);
@@ -90,9 +97,9 @@ public class RegistrationPage2 implements ActionListener , Serializable {
 			frame.add(confirmpass);
 			frame.add(welcome);
 			frame.add(Profile);
-			frame.add(AvailablePosition);
-			frame.add(requirements);
-			frame.add(requirementInput);
+			//frame.add(AvailablePosition);
+			//frame.add(requirements);
+			//frame.add(requirementInput);
 			frame.add(address);
 			frame.add(addressInput);
 			
@@ -131,7 +138,7 @@ public class RegistrationPage2 implements ActionListener , Serializable {
 				company.setPassword(String.valueOf(pass.getPassword()));
 				company.setEmail(gmailinput.getText());
 				company.setProfile(ProfileInplut.getText());
-				company.setRequirements(requirementInput.getText());
+				//company.setRequirements(requirementInput.getText());
 				company.setAddress(addressInput.getText());
 				company.setconfirmPassword(String.valueOf(confirmpasswordinput.getPassword()));
 				if(unvalid == false) {
@@ -159,6 +166,11 @@ public class RegistrationPage2 implements ActionListener , Serializable {
 				confirmpasswordinput.setText("");
 				ProfileInplut.setText("");
 				
+			}
+			
+			if(e.getSource() == backbutton) {
+				frame.dispose();
+				FirstPage fp = new FirstPage();
 			}
 			
 			

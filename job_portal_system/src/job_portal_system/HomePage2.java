@@ -27,13 +27,15 @@ public class HomePage2 implements ActionListener , Serializable {
 	JButton changepass = new JButton("OK");
 	JButton addpositionOk = new JButton("OK");
 	JButton deletepositionOk = new JButton("OK");
+	JButton sendMessageOk = new JButton("OK");
 	/*positions */
 	JTextField GmailInput = new JTextField();
 	 JTextField PositionNameInput = new JTextField();
+	 JLabel PositionName = new JLabel();
 	JTextField PositionRequirements = new JTextField();
 	 JTextField CompanyName= new JTextField();
 	
-	JLabel PositionName = new JLabel();
+	
 	JLabel PositionReq = new JLabel();
 	JLabel CompanyN= new JLabel();
 	
@@ -55,7 +57,8 @@ public class HomePage2 implements ActionListener , Serializable {
 	JMenu Exit = new JMenu("Sign out");
 	int Current_user;
 	ArrayList<Company> Users = new ArrayList<Company>();
-	//ArrayList<Position> PUsers = new ArrayList<Position>();
+	ArrayList<Message> Messagess = new ArrayList<>();
+	ArrayList<Applicant> applicants = new ArrayList<Applicant>();
 	
 	JMenuItem viewInfo = new JMenuItem("View your info");
 	
@@ -80,6 +83,8 @@ public class HomePage2 implements ActionListener , Serializable {
 		
 		Current_user= i;
 		Users = Companies;
+		Messagess = Serialize.Mload();
+		applicants = Serialize.load();
 		//PUsers = positions;
 		infomenu.add(viewInfo);
 		infomenu.add(editmenu);
@@ -89,12 +94,14 @@ public class HomePage2 implements ActionListener , Serializable {
 		textfield2.setBounds(250, 80, 125, 25);
 		
 		PositionNameInput.setBounds(150, 130, 250, 25);
+		
 		GmailInput.setBounds(150, 130, 250, 25);
 		PositionRequirements.setBounds(150, 180, 250, 25);
+		PositionName.setBounds(10, 130, 160, 25);
 		CompanyName.setBounds(150, 230, 250, 25);
 		MymessageInput.setBounds(150, 180, 250, 25);
 		
-		PositionName.setBounds(10, 130, 160, 25);
+		
 		PositionReq.setBounds(10, 180, 160, 25);
 		CompanyN.setBounds(10, 230, 250, 25);
 		Mymessage.setBounds(10, 180, 160, 25);
@@ -118,6 +125,7 @@ public class HomePage2 implements ActionListener , Serializable {
 		addpositionOk.setBounds(100, 270, 100, 25);
 		addmessage.setFocusable(false);
 		deletepositionOk.setBounds(100, 250, 100, 25);
+		sendMessageOk.setBounds(100, 250, 100, 25);
 		
 		addtans.setBounds(20, 135, 100, 25);
 		addtans.setFocusable(false);
@@ -150,7 +158,7 @@ public class HomePage2 implements ActionListener , Serializable {
 		editUser.addActionListener(this);
 		addPostition.addActionListener(this);
 		removePosition.addActionListener(this);
-
+		editPostition.addActionListener(this);
 		Messages.addActionListener(this);
 		viewMesseges.addActionListener(this);
 		sendMesseges.addActionListener(this);
@@ -160,7 +168,7 @@ public class HomePage2 implements ActionListener , Serializable {
 		
 		addpositionOk.addActionListener(this);
 		deletepositionOk.addActionListener(this);
-		
+		sendMessageOk.addActionListener(this);
 		frame.setJMenuBar(menuBar);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(500,500);
@@ -183,6 +191,8 @@ public class HomePage2 implements ActionListener , Serializable {
 		frame.add(Mymessage);
 		frame.add(MymessageInput);
 		frame.add(GmailInput);
+		frame.add(sendMessageOk);
+		sendMessageOk.setVisible(false);
 		Mymessage.setVisible(false);
 		MymessageInput.setVisible(false);
 		addpositionOk.setVisible(false);
@@ -310,13 +320,17 @@ public class HomePage2 implements ActionListener , Serializable {
 				 Message3.setText("position is already existed");
 			}*/
 			else {
-				Position P = new Position();
-				P.setName(textfield.getText());
+			Position P = new Position();
+			P.setName(PositionNameInput.getText());
+			P.setReuirements(PositionRequirements.getText());
 			//	Users.get(Current_user).AddPosition(Users);
-			ArrayList<Position> ps = new ArrayList<Position>();
+			/*ArrayList<Position> ps = new ArrayList<Position>();
 			ps.addAll(Users.get(Current_user).getpositions());
 			ps.add(P);
-			Users.get(Current_user).setpositions(ps);
+			Users.get(Current_user).setpositions(ps);*/
+			
+			Users.get(Current_user).AddPosition(P);
+			//System.out.println(Users.get(Current_user).getpositions().toString());
 			
 			//Users.get(Current_user).set(textfield.getText());
 			//Message.setText("Welcome " + Users.get(Current_user).getName());
@@ -357,11 +371,38 @@ public class HomePage2 implements ActionListener , Serializable {
 			Message3.setText("TO REMOVE A POSITION PLEASE ENTER THE POSITION : ");
 		}
 		
+		if(e.getSource() == deletepositionOk) {
+			Position Rp = new Position();
+			Rp.setName(PositionNameInput.getText());
+			Users.get(Current_user).RemovePosition(Rp);
+			Message3.setText("position specified deleted successfully");
+			//System.out.println(Users.get(Current_user).getpositions().toString());
+		}
+		
+		
+		
+		if (e.getSource() == editPostition) {
+			JFrame fs=new JFrame();
+			String[][] dataa = new String[Users.get(Current_user).getpositions().size()][];
+			for (int i = 0; i < Users.get(Current_user).getpositions().size(); i++) {
+				dataa[i] = new String[]{Users.get(Current_user).getpositions().get(i).getRequirements(), Users.get(Current_user).getpositions().get(i).getName()};
+			}
+			
+			String[] columnNamess = { "Requirements", "Position"};
+			JTable jtt=new JTable(dataa,columnNamess);    
+		    jtt.setBounds(10,10,500,500);          
+		    JScrollPane sp=new JScrollPane(jtt);    
+		    fs.add(sp);          
+		    fs.setSize(500,500);    
+		    fs.setVisible(true);
+		}
+		
 		/////////////////////////////////////////
 		ArrayList<Position> positions = new ArrayList<Position>();
 
 		
 		if(e.getSource() ==sendMesseges) {
+			sendMessageOk.setVisible(true);
 			addpositionOk.setVisible(false);
 			deletepositionOk.setVisible(true);
 			GmailInput.setVisible(true);
@@ -386,19 +427,33 @@ public class HomePage2 implements ActionListener , Serializable {
 			Mymessage.setVisible(true);
 			
 		}
-		ArrayList<Applicant> applicants = new ArrayList<>();
-		ArrayList<Message> Messages = new ArrayList<>();
-		if(e.getSource() ==deletepositionOk) {
+		//ArrayList<Applicant> applicants = new ArrayList<>();
+	
+		if(e.getSource() ==sendMessageOk) {
+			ArrayList<String> ApplicantEmails = new ArrayList<>();
 			Message m = new Message();
 			m.setSender(Users.get(Current_user).getEmail());
 			m.setReceiver(GmailInput.getText());
 			m.setContent(MymessageInput.getText());
+			
+
+			for (Applicant a : applicants)
+				
+			{
+				ApplicantEmails.add(a.getEmail());
+			}
+			
+			if(!ApplicantEmails.contains(GmailInput.getText()))
+			{
+				Message3.setText("applicant gmail cannot be found!");	
+			} else {
 			if(!(m.Is_Empty()))
 			{
-				Messages.add(m);
+				Messagess.add(m);
 				Serialize.Csave(Users);
-				Serialize.Msave(Messages);
+				Serialize.Msave(Messagess);
 				Message3.setText("Done!");
+				sendMessageOk.setVisible(false);
 			}
 			else
 			{
@@ -409,14 +464,19 @@ public class HomePage2 implements ActionListener , Serializable {
 			PositionName.setVisible(false);
 			deletepositionOk.setVisible(false);
 			GmailInput.setVisible(false);
+			sendMessageOk.setVisible(false);
+			
+			}
 		}
 		
 		if(e.getSource() == viewMesseges) {
+			
 			ArrayList<Message> SentM = new ArrayList<>();
-			for (int i = 0; i < Messages.size(); i++) {
-				if(Users.get(Current_user).getEmail().equals(Messages.get(i).getSender()))
+			
+			for (int i = 0; i < Messagess.size(); i++) {
+				if(Users.get(Current_user).getEmail().equals(Messagess.get(i).getSender()))
 				{
-					SentM.add(Messages.get(i));
+					SentM.add(Messagess.get(i));
 				}
 			}
 			JFrame f=new JFrame();

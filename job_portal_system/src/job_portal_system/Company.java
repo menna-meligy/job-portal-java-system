@@ -149,34 +149,26 @@ public class Company implements Serializable  {
 
 	
 
-/*	public void AddPosition(ArrayList<Company> companies)
+public void AddPosition(Position P)
 	{ 
-		Position P = new Position();
-		for(Company i : companies)
-		{
-		i.positions.add(P);
-		}
-		
-	}*/
+		Position position = new Position();
+		this.positions.add(P);
+	}
 
 
 
-	/*
-	public void RemovePosition(ArrayList<Company> companies)
+	
+	public void RemovePosition(Position P)
 	{
-		for(Company i : companies)
+
+		for(int i = 0; i < this.positions.size(); i++)
 		{
-			if (i.getName().equals(HomePage2.CompanyName.getText()))
-					{
-				for (Position j : positions)
-			if(j.getName().equals(HomePage2.PositionNameInput.getText()))
+			if(this.positions.get(i).getName().equals(P.getName()))
 			{
-				positions.remove(j);
+				this.positions.remove(i);
 			}
-			
-					}
 		}
-	}*/
+	}
 	/*
 	public static ArrayList<Position> viewPositions(ArrayList<Company> companies) {
 		

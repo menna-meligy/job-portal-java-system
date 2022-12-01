@@ -17,6 +17,7 @@ public class LoginPage implements ActionListener , Serializable{
 	JButton loginbutton = new JButton("Login");
 	JButton resetbutton = new JButton("Reset");
 	JButton registerbutton = new JButton("Register");
+	JButton backbutton = new JButton("Back");
 	JTextField UserNameField = new JTextField();
 	JPasswordField PasswordField = new JPasswordField();
 	JLabel UserName = new JLabel("Username:");
@@ -43,14 +44,23 @@ public class LoginPage implements ActionListener , Serializable{
 		resetbutton.setFocusable(false);
 		resetbutton.addActionListener(this);
 		Registerask.setBounds(100, 270, 300, 25);
-		registerbutton.setBounds(180, 320, 100, 25);
+		registerbutton.setBounds(140, 320, 90, 25);
 		registerbutton.setFocusable(false);
 		registerbutton.addActionListener(this);
+		
+		
+		backbutton.setBounds(240, 320, 90, 25);
+		backbutton.setFocusable(false);
+		backbutton.addActionListener(this);
+		
 		
 		frame.add(welcome);
 		frame.add(loginbutton);
 		frame.add(resetbutton);
 		frame.add(registerbutton);
+		
+		frame.add(backbutton);
+		backbutton.setVisible(true);
 		frame.add(Message);
 		frame.add(UserName);
 		frame.add(UserPassword);
@@ -95,6 +105,12 @@ public class LoginPage implements ActionListener , Serializable{
 		if(e.getSource() == registerbutton) {
 			frame.dispose();
 			RegistrationPage registrationPage = new RegistrationPage(applicants);
+		}
+		
+		
+		if(e.getSource() == backbutton) {
+			frame.dispose();
+			FirstPage fp = new FirstPage();
 		}
 		
 	}

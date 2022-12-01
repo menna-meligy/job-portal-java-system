@@ -1,0 +1,45 @@
+package job_portal_system;
+
+import static org.junit.Assert.assertEquals;
+
+import java.util.ArrayList;
+
+public class ApplicantTest {
+
+	@Test
+	public void test2() {
+		Applicant test1= new Applicant("user1", "123", "1111", "1111");
+		Applicant test2= new Applicant("user2", "222", "2222", "2222");
+		Applicant test3= new Applicant("user3", "333", "3333", "3333");
+		ArrayList <Applicant> applicant = new ArrayList<>();
+		applicant.add(test1);
+		applicant.add(test2);
+		applicant.add(test3);
+		boolean output = test2.Is_exists(applicant);
+		assertEquals(true, output);
+	}
+	@Test
+	public void test3() {
+		Applicant test1= new Applicant("user1", "123", "1111", "1111");
+		Applicant test2= new Applicant("user2", "222", "2222", "2222");
+		Applicant test3= new Applicant("user3", "333", "3333", "3333");
+		ArrayList <Applicant> applicant = new ArrayList<>();
+		applicant.add(test1);
+		applicant.add(test3);
+		boolean output = test4.Is_exists(applicant);
+		assertEquals(false, output);
+	}
+	
+	@Test
+	public void test4() {
+		User test2= new User("user2", "user2@gmail.com", "2222", "2222");
+		boolean output = test2.Can_Login();
+		assertEquals(false, output);
+	}
+	@Test
+	public void test5() {
+		User test1= new User("user1", "user1.gmail.com", "1111", "1111");
+		boolean output = test1.Can_Login();
+		assertEquals(true, output);
+	}
+}

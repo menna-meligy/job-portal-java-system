@@ -11,8 +11,7 @@ public class Applicant implements Serializable {
 	private String confirmPassword;
 	private String totalExperiance;
 	private String skills ; 
-	private String workTitle;
-	private float expectedSalary;
+
 	
 	public Applicant() {
 	this.Name=" ";
@@ -21,17 +20,15 @@ public class Applicant implements Serializable {
 	this.confirmPassword=" ";
 	this.totalExperiance= " ";
 	this.skills = " ";
-	this.workTitle=" ";
-	this.expectedSalary= 0;
+
 	}
-	public Applicant(String fName, String lName, String Password, String confirmPassword ,  String totalExperiance , String sk , String workTitle , float expectedSalary ) {
+	public Applicant(String fName, String lName, String Password, String confirmPassword ,  String totalExperiance , String sk ) {
 		this.Name = fName;
 		this.Password = Password;
 		this.confirmPassword = confirmPassword;
 		this.totalExperiance = totalExperiance;
 		this.skills = sk;
-		this.workTitle = workTitle;
-		this.expectedSalary = expectedSalary;
+
 	}
 
 	public String getName() {
@@ -82,22 +79,7 @@ public class Applicant implements Serializable {
 	public void setSkills(String sk) {
 		skills = sk;
 	}
-	
-	public String getWorkTitle() {
-		return workTitle ;
-	}
 
-	public void setWorkTitle(String workT) {
-		workTitle = workT;
-	}
-	
-	public float getexpectedSalary() {
-		return expectedSalary ;
-	}
-
-	public void setexpectedSalary(String expectedSalary) {
-		expectedSalary = expectedSalary;
-	}
 	
 	
 	
